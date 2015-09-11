@@ -76,7 +76,7 @@ public abstract class BaseChart implements Chart {
     }
 
     protected void customizeLabelColors(org.jfree.chart.JFreeChart c) {
-        List keys = getLabels();
+        List<String> keys = getLabels();
         Map<String, Style> styles = getStyleMap();
         if (keys != null) {
             for (int i = 0; i < keys.size(); i++) {
