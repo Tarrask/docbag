@@ -1,5 +1,6 @@
 package org.docbag.chart.jfree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jfree.data.category.CategoryDataset;
@@ -17,8 +18,13 @@ public abstract class CategoryDataSetChart extends BaseChart {
         this.dataSet = builder.dataSet;
     }
 
-    protected List<String> getLabels() {
-        return dataSet.getRowKeys();
+    
+	protected List<String> getLabels() {
+		List<String> list = new ArrayList<String>();
+		for(Object o: dataSet.getRowKeys()) {
+			list.add(o.toString());
+		}
+        return list;
     }
 
     public abstract static class Builder<T extends CategoryDataSetChart> extends BaseChartBuilder<T> {

@@ -1,5 +1,6 @@
 package org.docbag.chart.jfree;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -54,7 +55,11 @@ public class PieChart extends BaseChart {
     }
 
     protected List<String> getLabels() {
-        return dataSet.getKeys();
+    	List<String> list = new ArrayList<String>();
+		for(Object o: dataSet.getKeys()) {
+			list.add(o.toString());
+		}
+        return list;
     }
 
     @Override
