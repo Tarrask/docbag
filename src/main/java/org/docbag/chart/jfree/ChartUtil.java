@@ -6,6 +6,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.AbstractCategoryItemRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
+import org.jfree.chart.renderer.xy.AbstractXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 
 /**
@@ -27,6 +28,9 @@ public class ChartUtil {
             renderer.setSeriesPaint(index, style.getColor());
         } else if (plot instanceof PiePlot) {
             ((PiePlot) plot).setSectionPaint(serieName, style.getColor());
+        } else if (plot instanceof XYPlot) {
+        	AbstractXYItemRenderer renderer = (AbstractXYItemRenderer)((XYPlot)plot).getRenderer();
+        	renderer.setSeriesPaint(index, style.getColor());
         }
     }
 
