@@ -16,6 +16,7 @@ class DefaultChartAttributes {
     }
 
     static final String title = "";
+    static final Font titleFont = new Font("Tahoma", Font.BOLD, 20);
     static final String xAxisLabel = "";
     static final String yAxisLabel = "";
     static final PlotOrientation plotOrientation = PlotOrientation.VERTICAL;
@@ -27,6 +28,7 @@ class DefaultChartAttributes {
     static final float bgAlpha = 1.0f;
     static final Paint bgPaint = Color.white;
     static final Paint plotBgPaint = Color.lightGray;
+    static final boolean plotOutline = true;
     static final boolean gradient = false;
     static final Map<String, Style> styles = Collections.emptyMap();
 }

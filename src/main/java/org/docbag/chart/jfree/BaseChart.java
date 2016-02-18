@@ -9,6 +9,7 @@ import org.docbag.chart.ChartBuilder;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 
 /**
  * JFreeChart based implementation of the {@link Chart} interface.
@@ -23,6 +24,7 @@ public abstract class BaseChart implements Chart {
     private JFreeChart chart;
     private final Type type;
     private final String title;
+    private final Font titleFont;
     private final String xAxisLabel;
     private final String yAxisLabel;
     private final PlotOrientation plotOrientation;
@@ -34,11 +36,13 @@ public abstract class BaseChart implements Chart {
     private final boolean thirdDimension;
     private final Paint bgPaint;
     private final Paint plotBgPaint;
+    private final boolean plotOutline;
     private final Map<String, Style> styleMap;
 
     public BaseChart(Type type, BaseChartBuilder<? extends BaseChart> builder) {
         this.type = type;
         this.title = builder.title;
+        this.titleFont = builder.titleFont;
         this.xAxisLabel = builder.xAxisLabel;
         this.yAxisLabel = builder.yAxisLabel;
         this.plotOrientation = builder.plotOrientation;
@@ -50,6 +54,7 @@ public abstract class BaseChart implements Chart {
         this.thirdDimension = builder.thirdDimension;
         this.bgPaint = builder.bgPaint;
         this.plotBgPaint = builder.plotBgPaint;
+        this.plotOutline = builder.plotOutline;
         this.styleMap = builder.styles;
     }
 
@@ -72,6 +77,11 @@ public abstract class BaseChart implements Chart {
         plot.setBackgroundImageAlpha(bgAlpha);
         plot.setForegroundAlpha(fgAlpha);
         plot.setBackgroundPaint(plotBgPaint);
+        plot.setOutlineVisible(plotOutline);
+        c.getTitle().setFont(titleFont);
+        if(plot instanceof XYPlot) {
+        	((XYPlot)plot).getDomainAxis().setLabelFont(new Font("Arial", Font.PLAIN, 9));
+        }
         customizeLabelColors(c);
     }
 
@@ -95,6 +105,10 @@ public abstract class BaseChart implements Chart {
 
     public String getTitle() {
         return title;
+    }
+    
+    public Font getTitleFont() {
+    	return titleFont;
     }
 
     public String getxAxisLabel() {
@@ -140,6 +154,10 @@ public abstract class BaseChart implements Chart {
     public Paint getPlotBgPaint() {
         return plotBgPaint;
     }
+    
+    public boolean isPlotOutline() {
+    	return plotOutline;
+    }
 
     public Map<String, Style> getStyleMap() {
         return Collections.unmodifiableMap(styleMap);
@@ -155,6 +173,7 @@ public abstract class BaseChart implements Chart {
     public static abstract class BaseChartBuilder<T extends BaseChart> implements ChartBuilder<T> {
         // optional
         private String title = DefaultChartAttributes.title;
+        private Font titleFont = DefaultChartAttributes.titleFont;
         private String xAxisLabel = DefaultChartAttributes.xAxisLabel;
         private String yAxisLabel = DefaultChartAttributes.yAxisLabel;
         private PlotOrientation plotOrientation = DefaultChartAttributes.plotOrientation;
@@ -166,6 +185,7 @@ public abstract class BaseChart implements Chart {
         private float bgAlpha = DefaultChartAttributes.bgAlpha;
         private Paint bgPaint = DefaultChartAttributes.bgPaint;
         private Paint plotBgPaint = DefaultChartAttributes.plotBgPaint;
+        private boolean plotOutline = DefaultChartAttributes.plotOutline;
         private Map<String, Style> styles = DefaultChartAttributes.styles;
 
         public abstract T build();
@@ -173,6 +193,11 @@ public abstract class BaseChart implements Chart {
         public BaseChartBuilder<T> title(String title) {
             this.title = title;
             return this;
+        }
+        
+        public BaseChartBuilder<T> titleFont(Font titleFont) {
+        	this.titleFont = titleFont;
+        	return this;
         }
 
         public BaseChartBuilder<T> xAxisLabel(String xAxisLabel) {
@@ -230,6 +255,11 @@ public abstract class BaseChart implements Chart {
             return this;
         }
 
+        public BaseChartBuilder<T> plotOutline(boolean outline) {
+        	this.plotOutline = outline;
+        	return this;
+        }
+        
         public BaseChartBuilder<T> styles(Map<String, Style> styles) {
             this.styles = styles;
             return this;

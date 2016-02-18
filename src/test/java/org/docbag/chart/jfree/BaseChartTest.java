@@ -20,6 +20,7 @@ public class BaseChartTest {
         }
 
         static final String title = "test";
+        static final Font titleFont = new Font("Tahoma", Font.BOLD, 20);
         static final String xAxisLabel = "testx";
         static final String yAxisLabel = "testy";
         static final PlotOrientation plotOrientation = PlotOrientation.HORIZONTAL;
@@ -31,6 +32,7 @@ public class BaseChartTest {
         static final float bgAlpha = 0.2f;
         static final Paint bgPaint = Color.black;
         static final Paint plotBgPaint = Color.white;
+        static final boolean plotOutline = false;
         static final java.util.Map<String, Style> styles = new HashMap<String, Style>();
 
         static {
@@ -64,12 +66,14 @@ public class BaseChartTest {
         TestChart chart = new TestChart.Builder().build();
         Assert.assertEquals(DefaultChartAttributes.plotOrientation, chart.getPlotOrientation());
         Assert.assertEquals(DefaultChartAttributes.title, chart.getTitle());
+        Assert.assertEquals(DefaultChartAttributes.titleFont, chart.getTitleFont());
         Assert.assertEquals(DefaultChartAttributes.xAxisLabel, chart.getxAxisLabel());
         Assert.assertEquals(DefaultChartAttributes.yAxisLabel, chart.getyAxisLabel());
         Assert.assertEquals(DefaultChartAttributes.fgAlpha, chart.getFgAlpha());
         Assert.assertEquals(DefaultChartAttributes.bgAlpha, chart.getBgAlpha());
         Assert.assertEquals(DefaultChartAttributes.bgPaint, chart.getBgPaint());
         Assert.assertEquals(DefaultChartAttributes.plotBgPaint, chart.getPlotBgPaint());
+        Assert.assertEquals(DefaultChartAttributes.plotOutline, chart.isPlotOutline());
         Assert.assertEquals(DefaultChartAttributes.styles, chart.getStyleMap());
         Assert.assertEquals(DefaultChartAttributes.legend, chart.isLegend());
         Assert.assertEquals(DefaultChartAttributes.thirdDimension, chart.isThirdDimension());
@@ -80,9 +84,9 @@ public class BaseChartTest {
     @Test
     public void testValues() throws Exception {
         TestChart chart = new TestChart.Builder().plotOrientation(TestChartAttributes.plotOrientation).title(
-            TestChartAttributes.title).xAxisLabel(TestChartAttributes.xAxisLabel).yAxisLabel(TestChartAttributes.yAxisLabel).fgAlpha(
+            TestChartAttributes.title).titleFont(TestChartAttributes.titleFont).xAxisLabel(TestChartAttributes.xAxisLabel).yAxisLabel(TestChartAttributes.yAxisLabel).fgAlpha(
             TestChartAttributes.fgAlpha).bgAlpha(TestChartAttributes.bgAlpha).bgPaint(TestChartAttributes.bgPaint).plotBgPaint(
-            TestChartAttributes.plotBgPaint).styles(TestChartAttributes.styles).legend(TestChartAttributes.legend).thirdDimension(
+            TestChartAttributes.plotBgPaint).plotOutline(TestChartAttributes.plotOutline).styles(TestChartAttributes.styles).legend(TestChartAttributes.legend).thirdDimension(
             TestChartAttributes.thirdDimension).tooltips(TestChartAttributes.tooltips).urls(TestChartAttributes.urls).build();
         Assert.assertEquals(TestChartAttributes.plotOrientation, chart.getPlotOrientation());
         Assert.assertEquals(TestChartAttributes.title, chart.getTitle());
@@ -92,6 +96,7 @@ public class BaseChartTest {
         Assert.assertEquals(TestChartAttributes.bgAlpha, chart.getBgAlpha());
         Assert.assertEquals(TestChartAttributes.bgPaint, chart.getBgPaint());
         Assert.assertEquals(TestChartAttributes.plotBgPaint, chart.getPlotBgPaint());
+        Assert.assertEquals(TestChartAttributes.plotOutline, chart.isPlotOutline());
         Assert.assertEquals(TestChartAttributes.styles, chart.getStyleMap());
         Assert.assertEquals(TestChartAttributes.legend, chart.isLegend());
         Assert.assertEquals(TestChartAttributes.thirdDimension, chart.isThirdDimension());
